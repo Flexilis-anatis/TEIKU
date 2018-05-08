@@ -22,7 +22,7 @@ Protected Methods:
     -> void setrect(float x, y, width, height)
         All arguments are floats. Simply sets the corresponding attributes in the class.
 
-Public Methods:
+Public Getter Methods:
     -> sf::Vector2f getPos()
         get's the X and Y attributes zipped together in a sf::Vector2f
     -> sf::Vector2f getSize()

@@ -1,6 +1,5 @@
 #include "image.h"
 
-
 /* Basically a constructor, just designed so it can be easily called by child classes.
  * From image.h docs:
  *
@@ -22,8 +21,8 @@ void Image::setup(std::string texturefilename, sf::RenderWindow* window)
     rect.setTexture(texture);
 
     // Setting position/size of rect
-    rect.setPosition(getPos());
-    rect.setSize(getSize());
+    rect.setPosition(this->getPos());
+    rect.setSize(this->getSize());
 
     // Saving render window
     this->window = window;

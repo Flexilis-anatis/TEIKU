@@ -47,7 +47,7 @@ Public Setter Methods:
 
 // Possibly the base class of buttons, for instance. But certainly useful for other
 // purposes
-class Image : pulbic Item
+class Image : public Item
 {
 protected:
     // This will hold the image. You can easily go texture.loadFromFile to load most
@@ -59,7 +59,7 @@ protected:
     sf::RectangleShape rect;
 
     // The main window pointer. Needed for displaying
-    sf::RenderWindow* window.
+    sf::RenderWindow* window;
 
 public:
     // set everything up. Needs a render window pointer and the filename of an image
@@ -108,7 +108,7 @@ public:
     /* height individual setters */
     // Just changes the height. Takes the Y element out of the sf::Vector if given
     void setheight(sf::Vector2f to);
-    void setheight(float newyheight;
+    void setheight(float newyheight);
 };
 
 

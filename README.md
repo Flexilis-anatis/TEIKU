@@ -1,2 +1,2 @@
-<h1 style="font-size: 3000%">TEIKU</h1>
+<h2>TEIKU</h2>
 Text Editor (I Know, Uninventive)

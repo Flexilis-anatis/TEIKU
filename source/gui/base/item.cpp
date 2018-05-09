@@ -3,7 +3,8 @@
 namespace gui
 {
 
-/* Protected method setrect. Taken from item.h docs:
+/* Protected method setrect.F
+ * From item.h docs:
  *
  *  -> void setrect(float x, y, width, height)
  *      All arguments are floats. Simply sets the corresponding properties in the
@@ -27,7 +28,8 @@ void Item::setrect(float x, float y, float width, float height)
 }
 
 
-/* Get the position of the object. Taken from item.h docs:
+/* Get the position of the object.
+ * From item.h docs:
  *
  *  -> sf::Vector2f getPos()
  *      get's the X and Y properties zipped together in a sf::Vector2f
@@ -39,7 +41,8 @@ sf::Vector2f Item::getPos()
 }
 
 
-/* Get the size of an object. Taken from item.h docs:
+/* Get the size of an object.
+ * From item.h docs:
  *
  *  -> sf::Vector2f getSize()
  *      get's the width and height properties zipped together in a sf::Vector2f
@@ -51,7 +54,7 @@ sf::Vector2f Item::getSize()
 }
 
 /* Set's the position of the rectangle.
- * From Item.h docs:
+ * From item.h docs:
  *
  * -> setPos(sf::Vector2f to)
  * -> setPos(float newx, float newy)
@@ -74,7 +77,7 @@ void Item::setPos(float newx, float newy)
 
 
 /* Set's the X position of the rectangle.
- * from Item.h docs:
+ * From item.h docs:
  *
  * -> setX(sf::Vector2f to)
  * -> setX(float newx)
@@ -93,7 +96,7 @@ void Item::setX(float newx)
 
 
 /* Set's the Y position of the rectangle.
- * from Item.h docs:
+ * from i.h docs:
  *
  * -> setY(sf::Vector2f to)
  * -> setY(float newy)
@@ -115,7 +118,7 @@ void Item::setY(float newy)
 
 
 /* Set's the size of the rectangle.
- * From Item.h docs:
+ * From item.h docs:
  *
  * -> setSize(sf::Vector2f to)
  * -> setSize(float newwidth, float newheight)
@@ -136,7 +139,7 @@ void Item::setSize(float newx, float newy)
 
 
 /* Set's the width of the rectangle.
- * from Item.h docs:
+ * from item.h docs:
  *
  * -> setWidth(sf::Vector2f to)
  * -> setWidth(float newwidth)
@@ -155,7 +158,7 @@ void Item::setWidth(float newwidth)
 
 
 /* Set's the height of the rectangle.
- * from Item.h docs:
+ * from item.h docs:
  *
  * -> setHeight(sf::Vector2f to)
  * -> setHeight(float newheight)
@@ -174,7 +177,7 @@ void Item::setHeight(float newheight)
 
 
 /* Set the rectangle's color.
- * Taken from item.h docs:
+ * From item.h docs:
  *
  *  -> void setRectColor(sf::Color color)
  *  -> void setRectColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)

@@ -25,13 +25,13 @@ void Text::setup(std::string fontfilename, sf::RenderWindow* window)
 
 /* Sets the text, defaults text color and calls setrect/setup.
  *
- * Taken from base/item.h docs:
+ * From base/item.h docs:
  *
  *  -> void setrect(float x, y, width, height)
  *      All arguments are floats. Simply sets the corresponding properties in the
  *      class.
  *
- * Taken from text.h docs:
+ * From text.h docs:
  *
  *  -> void setup(std::string fontfilename, sf::RenderWindow* window)
  *      Loads the font and sets the window property.

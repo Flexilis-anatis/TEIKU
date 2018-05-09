@@ -75,6 +75,10 @@ public:
 
     // Displays the background and text
     void display();
+
+    // Set's the rectangle color. Uses RGBA format, with alpha defaulting to 255
+    void setRectColor(sf::Color color);
+    void setRectColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255);
 };
 
 } // namespace gui

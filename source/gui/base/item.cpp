@@ -175,28 +175,4 @@ void Item::setHeight(float newheight)
     setSize(width, newheight);
 }
 
-
-/* Set the rectangle's color.
- * From item.h docs:
- *
- *  -> void setRectColor(sf::Color color)
- *  -> void setRectColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
- *      Set the rect color with an sf::Color or RGBA (alpha defaulting to 255).
- *      If you don't want a it to be visible, set the alpha to 0 and it will be
- *      just fine.
-*/
-
-void Item::setRectColor(sf::Color color)
-{
-    rect.setFillColor(color);
-}
-
-void Item::setRectColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
-{
-    // Unlike the setter methods - which I hopefully shouldn't need to reuse all that
-    // often - this doesn't call the other method as to avoid copying the sf::Color
-    // object.
-    rect.setFillColor(sf::Color(red, green, blue, alpha));
-}
-
 } // namespace gui

@@ -1,10 +1,13 @@
 #include "item.h"
 
+namespace gui
+{
 
 /* Protected method setrect. Taken from item.h docs:
  *
  *  -> void setrect(float x, y, width, height)
- *      All arguments are floats. Simply sets the corresponding attributes in the class.
+ *      All arguments are floats. Simply sets the corresponding properties in the
+ *      class.
 */
 
 void Item::setrect(float x, float y, float width, float height)
@@ -14,13 +17,20 @@ void Item::setrect(float x, float y, float width, float height)
     this->y         = y;
     this->width     = width;
     this->height    = height;
+
+    // Setting position/size of rect
+    rect.setPosition(this->getPos());
+    rect.setSize(this->getSize());
+
+    // Setting alpha to 0 by default to make it invisible
+    rect.setFillColor(sf::Color(0, 0, 0, 0));
 }
 
 
 /* Get the position of the object. Taken from item.h docs:
  *
  *  -> sf::Vector2f getPos()
- *      get's the X and Y attributes zipped together in a sf::Vector2f
+ *      get's the X and Y properties zipped together in a sf::Vector2f
 */
 
 sf::Vector2f Item::getPos()
@@ -32,10 +42,158 @@ sf::Vector2f Item::getPos()
 /* Get the size of an object. Taken from item.h docs:
  *
  *  -> sf::Vector2f getSize()
- *      get's the width and height attributes zipped together in a sf::Vector2f
+ *      get's the width and height properties zipped together in a sf::Vector2f
 */
 
 sf::Vector2f Item::getSize()
 {
     return sf::Vector2f(width, height);
 }
+
+/* Set's the position of the rectangle.
+ * From Item.h docs:
+ *
+ * -> setPos(sf::Vector2f to)
+ * -> setPos(float newx, float newy)
+ *      Set the X and Y. Can take either two floats or a sf::Vector2f
+*/
+
+void Item::setPos(sf::Vector2f to)
+{
+    // All position setters call this method, so I only need to reset X/Y here. Same
+    // with the setSize method down below.
+    rect.setPosition(to);
+    x = to.x;
+    y = to.y;
+}
+
+void Item::setPos(float newx, float newy)
+{
+    setPos(sf::Vector2f(newx, newy));
+}
+
+
+/* Set's the X position of the rectangle.
+ * from Item.h docs:
+ *
+ * -> setX(sf::Vector2f to)
+ * -> setX(float newx)
+ *      Set the X. Will take the X element out of a sf::Vector
+*/
+
+void Item::setX(sf::Vector2f to)
+{
+    setPos(to.x, y);
+}
+
+void Item::setX(float newx)
+{
+    setPos(newx, y);
+}
+
+
+/* Set's the Y position of the rectangle.
+ * from Item.h docs:
+ *
+ * -> setY(sf::Vector2f to)
+ * -> setY(float newy)
+ *      Set the Y. Will take the Y element out of a sf::Vector
+*/
+
+void Item::setY(sf::Vector2f to)
+{
+    setPos(x, to.y);
+}
+
+void Item::setY(float newy)
+{
+    setPos(x, newy);
+}
+
+
+/// END POSITION SETTERS, START SIZE SETTERS ///
+
+
+/* Set's the size of the rectangle.
+ * From Item.h docs:
+ *
+ * -> setSize(sf::Vector2f to)
+ * -> setSize(float newwidth, float newheight)
+ *      Set the width and height. Can take either two floats or a sf::Vector2f
+*/
+
+void Item::setSize(sf::Vector2f to)
+{
+    rect.setSize(to);
+    x = to.x;
+    y = to.y;
+}
+
+void Item::setSize(float newx, float newy)
+{
+    setSize(sf::Vector2f(newx, newy));
+}
+
+
+/* Set's the width of the rectangle.
+ * from Item.h docs:
+ *
+ * -> setWidth(sf::Vector2f to)
+ * -> setWidth(float newwidth)
+ *      Set the width. Will take the X element out of a sf::Vector
+*/
+
+void Item::setWidth(sf::Vector2f to)
+{
+    setSize(to.x, height);
+}
+
+void Item::setWidth(float newwidth)
+{
+    setSize(newwidth, height);
+}
+
+
+/* Set's the height of the rectangle.
+ * from Item.h docs:
+ *
+ * -> setHeight(sf::Vector2f to)
+ * -> setHeight(float newheight)
+ *      Set the height. Will take the Y element out of a sf::Vector
+*/
+
+void Item::setHeight(sf::Vector2f to)
+{
+    setSize(width, to.y);
+}
+
+void Item::setHeight(float newheight)
+{
+    setSize(width, newheight);
+}
+
+
+/* Set the rectangle's color.
+ * Taken from item.h docs:
+ *
+ *  -> void setRectColor(sf::Color color)
+ *  -> void setRectColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
+ *      Set the rect color with an sf::Color or RGBA (alpha defaulting to 255).
+ *      If you don't want a it to be visible, set the alpha to 0 and it will be
+ *      just fine.
+*/
+
+void Item::setRectColor(sf::Color color)
+{
+    rect.setFillColor(color);
+}
+
+void Item::setRectColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
+{
+    // Unlike the setter methods - which I hopefully shouldn't need to reuse all that
+    // often - this doesn't call the other method as to avoid copying the sf::Color
+    // object.
+    rect.setFillColor(sf::Color(red, green, blue, alpha));
+}
+
+} // namespace gui

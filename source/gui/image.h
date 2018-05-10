@@ -10,14 +10,16 @@ Class Image - semi abstract class representing a GUI item that displays an image
 Protected Properties:
     -> sf::Texture* texture
         Holds a loaded image
-    -> sf::RectangleShape rect
-        Holds a rectangle. Texture's host
+    -> sf::RenderWindow* window
+        A pointer to hosting window.
 
 
-Public Methods:
-    -> void setup(std::string texturefilename, sf::RenderWindow* window)
+Protected Methods:
+    -> void setup(std::string texturefilename, sf::RenderWindow& window)
         loads the texture, puts the texture into the rectangle, and sets the window
         attribute.
+
+Public Methods:
     -> void display()
         displays the rectangle on to the window.
 */
@@ -38,18 +40,18 @@ protected:
     // The main window pointer. Needed for displaying
     sf::RenderWindow* window;
 
-    // set everything up. Needs a render window pointer and the filename of an image
-    void setup(std::string texturefilename, sf::RenderWindow* window);
+    // set everything up. Needs a render window reference and the filename of an image
+    void setup(std::string texturefilename, sf::RenderWindow& window);
 
 
 public:
     // Calls setrect and setup
     Image(float x, float y, float width, float height,
-          std::string texturefilename, sf::RenderWindow* window);
+          std::string texturefilename, sf::RenderWindow& window);
 
     // Since this will be in the lowest level of GUI classes that will be used as a
     // standalone, we need a placeholder constructor
-    Image(){}
+    Image();
 
     // Just displays the rectangle and exits.
     void display();

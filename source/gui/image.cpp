@@ -6,17 +6,18 @@ namespace gui
 /* Basically a constructor, just designed so it can be easily called by child classes.
  * From image.h docs:
  *
- *  -> void setup(std::string texturefilename, sf::RenderWindow* window)
+ *  -> void setup(std::string texturefilename, sf::RenderWindow& window)
  *      loads the texture, puts the texture into the rectangle, and sets the window
- *      attribute. Note this MUST BE CALLED AFTER Item::setrect
+ *      attribute.
 */
 
-void Image::setup(std::string texturefilename, sf::RenderWindow* window)
+void Image::setup(std::string texturefilename, sf::RenderWindow& window)
 {
     // Loading texture
     if (!(texture->loadFromFile(texturefilename)))
     {
-        // error opening file. Might just throw an exception
+        // error opening file. Might just throw an exception. Not sure what to do
+        // here yet
         return;
     }
 
@@ -24,7 +25,7 @@ void Image::setup(std::string texturefilename, sf::RenderWindow* window)
     rect.setTexture(texture);
 
     // Saving render window
-    this->window = window;
+    this->window = &window;
 }
 
 
@@ -32,9 +33,9 @@ void Image::setup(std::string texturefilename, sf::RenderWindow* window)
  *
  * From image.h docs:
  *
- *  -> void setup(std::string texturefilename, sf::RenderWindow* window)
+ *  -> void setup(std::string texturefilename, sf::RenderWindow& window)
  *      loads the texture, puts the texture into the rectangle, positions and resizes
- *      the rectangle, and sets the window attribute
+ *      the rectangle, and sets the window attribute.
  *
  * From base/item.h docs:
  *
@@ -44,10 +45,11 @@ void Image::setup(std::string texturefilename, sf::RenderWindow* window)
 */
 
 Image::Image(float x, float y, float width, float height,
-             std::string texturefilename, sf::RenderWindow* window)
+             std::string texturefilename, sf::RenderWindow& window)
 {
+    // Setup is called first as to set the rect's texture and avoid making it invisible
     setup(texturefilename, window);
-    setrect(x, y, width, height);
+    setrect(x, y, width, height); // gui::Item::setRect(float,float,float,float): defined in source/gui/base
 }
 
 

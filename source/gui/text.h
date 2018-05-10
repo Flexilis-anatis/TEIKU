@@ -8,8 +8,8 @@ Class Text - semi abstract class representing a GUI item that displays text
 
 Protected Properties:
     -> sf::Font font
-        Holds a font to render text with. (I decided to recreate the sf::Text object every
-        time)
+        Holds a font to render text with. (I decided to recreate the sf::Text object
+        every time)
     -> sf::Color textcolor
         Holds the color to render the text with
     -> sf::Color bgcolor
@@ -21,7 +21,7 @@ Protected Properties:
 
 
 Protected Methods:
-    -> void setup(std::string fontfilename, sf::RenderWindow* window)
+    -> void setup(std::string fontfilename, sf::RenderWindow& window)
         Loads the font and sets the window property.
 
 
@@ -55,13 +55,13 @@ protected:
     std::string rawText;
 
     // Load font and set window
-    void setup(std::string fontfilename, sf::RenderWindow* window);
+    void setup(std::string fontfilename, sf::RenderWindow& window);
 
 
 public:
     // Calls setrect and setup
     Text(float x, float y, float width, float height, std::string text,
-         std::string fontfilename, sf::RenderWindow* window);
+         std::string fontfilename, sf::RenderWindow& window);
 
     // Since this is in the lowest level of GUI classes that will be used as a
     // standalone, it needs a placeholder constructor

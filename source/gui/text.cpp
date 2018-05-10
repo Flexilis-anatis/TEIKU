@@ -6,11 +6,11 @@ namespace gui
 /* A partial constructor, taking care of the font and window. Must come after setrect.
  * From text.h docs:
  *
- *  -> void setup(std::string fontfilename, sf::RenderWindow* window)
+ *  -> void setup(std::string fontfilename, sf::RenderWindow& window)
  *      Loads the font and sets the window property.
 */
 
-void Text::setup(std::string fontfilename, sf::RenderWindow* window)
+void Text::setup(std::string fontfilename, sf::RenderWindow& window)
 {
     // Tries to load font. The if statement will only trigger if it fails
     if (!font.loadFromFile(fontfilename))
@@ -19,7 +19,7 @@ void Text::setup(std::string fontfilename, sf::RenderWindow* window)
         return;
     }
 
-    this->window = window;
+    this->window = &window;
 }
 
 
@@ -33,12 +33,12 @@ void Text::setup(std::string fontfilename, sf::RenderWindow* window)
  *
  * From text.h docs:
  *
- *  -> void setup(std::string fontfilename, sf::RenderWindow* window)
+ *  -> void setup(std::string fontfilename, sf::RenderWindow& window)
  *      Loads the font and sets the window property.
 */
 
 Text::Text(float x, float y, float width, float height, std::string text,
-           std::string fontfilename, sf::RenderWindow* window)
+           std::string fontfilename, sf::RenderWindow& window)
 {
     // Calling setup methods
     setrect(x, y, width, height);

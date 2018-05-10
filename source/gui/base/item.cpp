@@ -7,8 +7,8 @@ namespace gui
  * From item.h docs:
  *
  *  -> void setrect(float x, y, width, height)
- *      All arguments are floats. Simply sets the corresponding properties in the
- *      class.
+ *      All arguments are floats. Simply sets the corresponding
+ *      properties in the class.
 */
 
 void Item::setrect(float x, float y, float width, float height)
@@ -23,8 +23,9 @@ void Item::setrect(float x, float y, float width, float height)
     rect.setPosition(this->getPos());
     rect.setSize(this->getSize());
 
-    // Setting alpha to 0 by default to make it invisible, but only if it doesn't have a texture
-    if (rect.getTexture() == nullptr)
+    // Setting alpha to 0 by default to make it invisible, but only if
+    // it doesn't have a texture
+    if (rect.getTexture()) == nullptr)
     {
         rect.setFillColor(sf::Color(0, 0, 0, 0));
     }
@@ -48,7 +49,8 @@ sf::Vector2f Item::getPos()
  * From item.h docs:
  *
  *  -> sf::Vector2f getSize()
- *      get's the width and height properties zipped together in a sf::Vector2f
+ *      get's the width and height properties zipped together in a
+ *      sf::Vector2f
 */
 
 sf::Vector2f Item::getSize()
@@ -66,8 +68,8 @@ sf::Vector2f Item::getSize()
 
 void Item::setPos(sf::Vector2f to)
 {
-    // All position setters call this method, so I only need to reset X/Y here. Same
-    // with the setSize method down below.
+    // All position setters call this method, so I only need to reset
+    // X/Y here. Same with the setSize method down below.
     rect.setPosition(to);
     x = to.x;
     y = to.y;
@@ -125,7 +127,8 @@ void Item::setY(float newy)
  *
  * -> setSize(sf::Vector2f to)
  * -> setSize(float newwidth, float newheight)
- *      Set the width and height. Can take either two floats or a sf::Vector2f
+ *      Set the width and height. Can take either two floats or a
+ *      sf::Vector2f
 */
 
 void Item::setSize(sf::Vector2f to)

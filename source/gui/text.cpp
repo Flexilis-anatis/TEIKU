@@ -73,35 +73,6 @@ void Text::setTextColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 }
 
 
-/* Displays the background/text.
- * Taken from text.h docs:
- *
- *  -> void display()
- *      Display the background and text.
- *      Note that text will be centered.
-*/
-
-void Text::display()
-{
-    // Draws background
-    window->draw(rect);
-
-    // Creates sf::Text object
-    sf::Text text = sf::Text(rawText, font, height-2);
-
-    // Calculates centered positions
-    int centeredYPos = y - (height / 7.f);
-    int centeredXPos = x + ((width - text.getLocalBounds().width) / 2.f);
-
-    // Sets position and size
-    text.setPosition(centeredXPos, centeredYPos);
-    text.setFillColor(textcolor);
-
-    // Draws text
-    window->draw(text);
-}
-
-
 /* Set the rectangle's color.
  * From text.h docs:
  *
@@ -123,6 +94,35 @@ void Text::setRectColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
     // reuse all that often - this doesn't call the other method as to avoid copying
     // the sf::Color object.
     rect.setFillColor(sf::Color(red, green, blue, alpha));
+}
+
+
+/* Displays the background/text.
+ * Taken from text.h docs:
+ *
+ *  -> void display()
+ *      Display the background and text.
+ *      Note that text will be centered.
+*/
+
+void Text::display()
+{
+    // Draws background
+    window->draw(rect);
+
+    // Creates sf::Text object
+    sf::Text text = sf::Text(rawText, font, height);
+
+    // Calculates centered positions
+    int centeredYPos = y - (height / 7.f);
+    int centeredXPos = x + ((width - text.getLocalBounds().width) / 2.f);
+
+    // Sets position and size
+    text.setPosition(centeredXPos, centeredYPos);
+    text.setFillColor(textcolor);
+
+    // Draws text
+    window->draw(text);
 }
 
 } // namespace gui

@@ -51,9 +51,6 @@ protected:
     // The main window
     sf::RenderWindow* window;
 
-    // The background
-    sf::RectangleShape background;
-
     // The actual text
     std::string rawText;
 
@@ -74,12 +71,12 @@ public:
     void setTextColor(sf::Color color);
     void setTextColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255);
 
-    // Displays the background and text
-    void display();
-
     // Set's the rectangle color. Uses RGBA format, with alpha defaulting to 255
     void setRectColor(sf::Color color);
     void setRectColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255);
+
+    // Displays the background and text
+    void display();
 };
 
 } // namespace gui

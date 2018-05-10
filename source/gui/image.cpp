@@ -1,6 +1,5 @@
 #include "image.h"
 
-
 namespace gui
 {
 
@@ -15,7 +14,7 @@ namespace gui
 void Image::setup(std::string texturefilename, sf::RenderWindow* window)
 {
     // Loading texture
-    if (!texture->loadFromFile(texturefilename))
+    if (!(texture->loadFromFile(texturefilename)))
     {
         // error opening file. Might just throw an exception
         return;
@@ -47,8 +46,8 @@ void Image::setup(std::string texturefilename, sf::RenderWindow* window)
 Image::Image(float x, float y, float width, float height,
              std::string texturefilename, sf::RenderWindow* window)
 {
-    setrect(x, y, width, height);
     setup(texturefilename, window);
+    setrect(x, y, width, height);
 }
 
 

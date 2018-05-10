@@ -30,7 +30,8 @@ Public Methods:
     -> void setTextColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
         Set the textcolor property with an sf::Color or RGBA (alpha defaulting to 255)
     -> void display()
-        Display the background and text
+        Display the background and text.
+        Note that text will be centered.
 */
 
 namespace gui

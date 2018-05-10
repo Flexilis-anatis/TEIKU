@@ -23,8 +23,11 @@ void Item::setrect(float x, float y, float width, float height)
     rect.setPosition(this->getPos());
     rect.setSize(this->getSize());
 
-    // Setting alpha to 0 by default to make it invisible
-    rect.setFillColor(sf::Color(0, 0, 0, 0));
+    // Setting alpha to 0 by default to make it invisible, but only if it doesn't have a texture
+    if (rect.getTexture() == nullptr)
+    {
+        rect.setFillColor(sf::Color(0, 0, 0, 0));
+    }
 }
 
 

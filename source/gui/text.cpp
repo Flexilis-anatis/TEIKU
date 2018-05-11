@@ -1,7 +1,5 @@
 #include "text.h"
 
-#include <iostream> // testing only
-
 namespace gui
 {
 

@@ -8,7 +8,7 @@ namespace gui
  *
  *  -> void setup(std::string texturefilename)
  *      loads the texture and puts the texture into the rectangle
-*/
+ */
 
 void Image::setup(std::string texturefilename)
 {
@@ -37,7 +37,7 @@ void Image::setup(std::string texturefilename)
  *  -> void setrect(float x, y, width, height)
  *      All arguments are floats. Simply sets the corresponding properties in the
  *      class.
-*/
+ */
 
 Image::Image(float x, float y, float width, float height,
              std::string texturefilename, sf::RenderWindow& window)

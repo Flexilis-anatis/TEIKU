@@ -3,7 +3,7 @@
 namespace gui
 {
 
-/* Protected method setrect.F
+/* Protected method setrect.
  * From item.h docs:
  *
  *  -> void setrect(float x, y, width, height)

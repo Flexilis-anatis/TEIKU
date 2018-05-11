@@ -39,7 +39,7 @@ void Item::setrect(float x, float y, float width, float height,
  *
  *  -> sf::Vector2f getPos()
  *      get's the X and Y properties zipped together in a sf::Vector2f
-*/
+ */
 
 sf::Vector2f Item::getPos()
 {
@@ -53,7 +53,7 @@ sf::Vector2f Item::getPos()
  *  -> sf::Vector2f getSize()
  *      get's the width and height properties zipped together in a
  *      sf::Vector2f
-*/
+ */
 
 sf::Vector2f Item::getSize()
 {
@@ -66,7 +66,7 @@ sf::Vector2f Item::getSize()
  * -> setPos(sf::Vector2f to)
  * -> setPos(float newx, float newy)
  *      Set the X and Y. Can take either two floats or a sf::Vector2f
-*/
+ */
 
 void Item::setPos(sf::Vector2f to)
 {
@@ -89,7 +89,7 @@ void Item::setPos(float newx, float newy)
  * -> setX(sf::Vector2f to)
  * -> setX(float newx)
  *      Set the X. Will take the X element out of a sf::Vector
-*/
+ */
 
 void Item::setX(sf::Vector2f to)
 {
@@ -108,7 +108,7 @@ void Item::setX(float newx)
  * -> setY(sf::Vector2f to)
  * -> setY(float newy)
  *      Set the Y. Will take the Y element out of a sf::Vector
-*/
+ */
 
 void Item::setY(sf::Vector2f to)
 {
@@ -131,7 +131,7 @@ void Item::setY(float newy)
  * -> setSize(float newwidth, float newheight)
  *      Set the width and height. Can take either two floats or a
  *      sf::Vector2f
-*/
+ */
 
 void Item::setSize(sf::Vector2f to)
 {
@@ -152,7 +152,7 @@ void Item::setSize(float newx, float newy)
  * -> setWidth(sf::Vector2f to)
  * -> setWidth(float newwidth)
  *      Set the width. Will take the X element out of a sf::Vector
-*/
+ */
 
 void Item::setWidth(sf::Vector2f to)
 {
@@ -171,7 +171,7 @@ void Item::setWidth(float newwidth)
  * -> setHeight(sf::Vector2f to)
  * -> setHeight(float newheight)
  *      Set the height. Will take the Y element out of a sf::Vector
-*/
+ */
 
 void Item::setHeight(sf::Vector2f to)
 {
@@ -187,7 +187,7 @@ void Item::setHeight(float newheight)
  * From item.h docs:
  *  -> void display()
  *      displays the rectangle on to the window.
-*/
+ */
 
 void Item::display()
 {

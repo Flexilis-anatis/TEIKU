@@ -14,7 +14,7 @@ Protected Properties:
 Protected Methods:
     -> void setup(std::string texturefilename)
         loads the texture and puts the texture into the rectangle
-*/
+ */
 
 namespace gui
 {

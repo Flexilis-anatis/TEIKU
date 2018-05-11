@@ -14,15 +14,13 @@ Protected Properties:
         Holds the color to render the text with
     -> sf::Color bgcolor
         Holds the color to render the background with
-    -> sf::RenderWindow* window
-        Holds a window to render to
     -> std::string rawText
         Holds the actual given text to render
 
 
 Protected Methods:
     -> void setup(std::string fontfilename, sf::RenderWindow& window)
-        Loads the font and sets the window property.
+        Loads the font.
 
 
 Public Methods:
@@ -38,7 +36,7 @@ namespace gui
 {
 
 // The image classes sister class, the Text class is - obviously - for rendering text.
-class Text : public Item
+class Text: public Item
 {
 
 protected:
@@ -48,14 +46,11 @@ protected:
     // The color of the text / background
     sf::Color textcolor;
 
-    // The main window
-    sf::RenderWindow* window;
-
     // The actual text
     std::string rawText;
 
-    // Load font and set window
-    void setup(std::string fontfilename, sf::RenderWindow& window);
+    // Loads font
+    void setup(std::string fontfilename);
 
 
 public:

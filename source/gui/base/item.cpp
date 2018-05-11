@@ -11,13 +11,15 @@ namespace gui
  *      properties in the class.
 */
 
-void Item::setrect(float x, float y, float width, float height)
+void Item::setrect(float x, float y, float width, float height,
+                   sf::RenderWindow& window)
 {
     // References 'this' to avoid naming conflict
     this->x         = x;
     this->y         = y;
     this->width     = width;
     this->height    = height;
+    this->window    = &window;
 
     // Setting position/size of rect
     rect.setPosition(this->getPos());
@@ -25,7 +27,7 @@ void Item::setrect(float x, float y, float width, float height)
 
     // Setting alpha to 0 by default to make it invisible, but only if
     // it doesn't have a texture
-    if (rect.getTexture()) == nullptr)
+    if (rect.getTexture() == nullptr)
     {
         rect.setFillColor(sf::Color(0, 0, 0, 0));
     }
@@ -179,6 +181,17 @@ void Item::setHeight(sf::Vector2f to)
 void Item::setHeight(float newheight)
 {
     setSize(width, newheight);
+}
+
+/* Displays the rectangle.
+ * From item.h docs:
+ *  -> void display()
+ *      displays the rectangle on to the window.
+*/
+
+void Item::display()
+{
+    window->draw(rect);
 }
 
 } // namespace gui

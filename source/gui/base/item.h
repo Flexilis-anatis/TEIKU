@@ -17,13 +17,15 @@ Protected Properties:
         height of some item
     -> sf::RectangleShape rect
         actual rectangle representing prev. properties
+    -> sf::RenderWindow* window
+        Holds a window to render to
 
 
 Protected Methods:
     -> virtual void display()
         pure virtual method that must be defined by children classes.
-    -> void setrect(float x, y, width, height)
-        All arguments are floats. Simply sets the corresponding properties in the
+    -> void setrect(float x, y, width, height, sf::RenderWindow& window)
+        First four arguments are floats. Simply sets the corresponding properties in the
         class.
 
 
@@ -77,12 +79,12 @@ protected:
     // The default rectangle
     sf::RectangleShape rect;
 
-    // Making it a pure virtual method. Children classes will have to implement
-    // themselves.
-    virtual void display() = 0;
+    // The main window pointer. Needed for displaying
+    sf::RenderWindow* window;
 
     // Just for child classes to set properties easier.
-    void setrect(float x, float y, float width, float height);
+    void setrect(float x, float y, float width, float height,
+                 sf::RenderWindow& window);
 
 
 public:
@@ -114,6 +116,9 @@ public:
     // Changes the height. Takes the Y element out of the sf::Vector if given
     void setHeight(sf::Vector2f to);
     void setHeight(float newyheight);
+
+    // Making it a virtual method. Children classes can implement themselves.
+    virtual void display();
 };
 
 } // namespace gui

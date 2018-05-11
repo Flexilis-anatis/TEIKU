@@ -6,11 +6,11 @@ namespace gui
 /* A partial constructor, taking care of the font and window. Must come after setrect.
  * From text.h docs:
  *
- *  -> void setup(std::string fontfilename, sf::RenderWindow& window)
- *      Loads the font and sets the window property.
+ *  -> void setup(std::string fontfilename)
+ *      Loads the font.
 */
 
-void Text::setup(std::string fontfilename, sf::RenderWindow& window)
+void Text::setup(std::string fontfilename)
 {
     // Tries to load font. The if statement will only trigger if it fails
     if (!font.loadFromFile(fontfilename))
@@ -18,8 +18,6 @@ void Text::setup(std::string fontfilename, sf::RenderWindow& window)
         // Again, need some sort of error handling
         return;
     }
-
-    this->window = &window;
 }
 
 
@@ -33,16 +31,16 @@ void Text::setup(std::string fontfilename, sf::RenderWindow& window)
  *
  * From text.h docs:
  *
- *  -> void setup(std::string fontfilename, sf::RenderWindow& window)
- *      Loads the font and sets the window property.
+ *  -> void setup(std::string fontfilename)
+ *      Loads the font.
 */
 
 Text::Text(float x, float y, float width, float height, std::string text,
            std::string fontfilename, sf::RenderWindow& window)
 {
     // Calling setup methods
-    setrect(x, y, width, height);
-    setup(fontfilename, window);
+    setrect(x, y, width, height, window);
+    setup(fontfilename);
 
     // Defaulting text color
     textcolor = sf::Color(0,   0,   0);
@@ -114,8 +112,8 @@ void Text::display()
     sf::Text text = sf::Text(rawText, font, height);
 
     // Calculates centered positions
-    int centeredYPos = y - (height / 7.f);
-    int centeredXPos = x + ((width - text.getLocalBounds().width) / 2.f);
+    int centeredYPos = y - ((height - text.getLocalBounds().height) / 2.f);
+    int centeredXPos = x + ((width -  text.getLocalBounds().width)  / 2.f);
 
     // Sets position and size
     text.setPosition(centeredXPos, centeredYPos);

@@ -6,12 +6,11 @@ namespace gui
 /* Basically a constructor, just designed so it can be easily called by child classes.
  * From image.h docs:
  *
- *  -> void setup(std::string texturefilename, sf::RenderWindow& window)
- *      loads the texture, puts the texture into the rectangle, and sets the window
- *      attribute.
+ *  -> void setup(std::string texturefilename)
+ *      loads the texture and puts the texture into the rectangle
 */
 
-void Image::setup(std::string texturefilename, sf::RenderWindow& window)
+void Image::setup(std::string texturefilename)
 {
     // Loading texture
     if (!(texture->loadFromFile(texturefilename)))
@@ -23,9 +22,6 @@ void Image::setup(std::string texturefilename, sf::RenderWindow& window)
 
     // Setting rectangles texture
     rect.setTexture(texture);
-
-    // Saving render window
-    this->window = &window;
 }
 
 
@@ -33,9 +29,8 @@ void Image::setup(std::string texturefilename, sf::RenderWindow& window)
  *
  * From image.h docs:
  *
- *  -> void setup(std::string texturefilename, sf::RenderWindow& window)
- *      loads the texture, puts the texture into the rectangle, positions and resizes
- *      the rectangle, and sets the window attribute.
+ *  -> void setup(std::string texturefilename,)
+ *      loads the texture and puts the texture into the rectangle
  *
  * From base/item.h docs:
  *
@@ -48,21 +43,8 @@ Image::Image(float x, float y, float width, float height,
              std::string texturefilename, sf::RenderWindow& window)
 {
     // Setup is called first as to set the rect's texture and avoid making it invisible
-    setup(texturefilename, window);
-    setrect(x, y, width, height); // gui::Item::setRect(float,float,float,float): defined in source/gui/base
-}
-
-
-/* Displays the rectangle on the render window.
- * From image.h docs:
- *
- *  -> void display()
- *      displays the rectangle on to the window.
-*/
-
-void Image::display()
-{
-    window->draw(rect);
+    setup(texturefilename);
+    setrect(x, y, width, height, window); // gui::Item::setRect(float,float,float,float): defined in source/gui/base
 }
 
 } // namespace gui

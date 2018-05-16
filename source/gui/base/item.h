@@ -75,8 +75,8 @@ class Item
 protected:
     // All items will be square based
     float x, y, width, height;
-
     // The default rectangle
+
     sf::RectangleShape rect;
 
     // The main window pointer. Needed for displaying

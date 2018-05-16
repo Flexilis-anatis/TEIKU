@@ -10,5 +10,5 @@ DynamicTextbox::DynamicTextbox(float x, float y, float width, float height,
     setrect(x, y, width, height, window);
     setup("resources\\monospace.ttf", startText, height);
 }
-
+s
 } // namespace gui

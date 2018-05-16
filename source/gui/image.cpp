@@ -40,7 +40,7 @@ void Image::setup(std::string texturefilename)
 */
 
 Image::Image(float x, float y, float width, float height,
-             std::string texturefilename, sf::RenderWindow& window)
+             std::string texturefilename, WindowRef window)
 {
     // Setup is called first as to set the rect's texture and avoid making it invisible
     setup(texturefilename);

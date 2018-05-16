@@ -6,5 +6,6 @@
 #include "gui/base/item.h"
 #include "gui/image.h"
 #include "gui/text.h"
+#include "gui/dynamictextbox.h"
 
 #endif // GUI_H_INCLUDED

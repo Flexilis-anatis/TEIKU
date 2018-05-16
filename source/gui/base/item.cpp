@@ -12,7 +12,7 @@ namespace gui
 */
 
 void Item::setrect(float x, float y, float width, float height,
-                   sf::RenderWindow& window)
+                   WindowRef window)
 {
     // References 'this' to avoid naming conflict
     this->x         = x;
@@ -41,7 +41,7 @@ void Item::setrect(float x, float y, float width, float height,
  *      get's the X and Y properties zipped together in a sf::Vector2f
 */
 
-sf::Vector2f Item::getPos()
+sf::Vector2f Item::getPos() const
 {
     return sf::Vector2f(x, y);
 }
@@ -55,7 +55,7 @@ sf::Vector2f Item::getPos()
  *      sf::Vector2f
 */
 
-sf::Vector2f Item::getSize()
+sf::Vector2f Item::getSize() const
 {
     return sf::Vector2f(width, height);
 }
@@ -189,7 +189,7 @@ void Item::setHeight(float newheight)
  *      displays the rectangle on to the window.
 */
 
-void Item::display()
+void Item::display() const
 {
     window->draw(rect);
 }

@@ -70,11 +70,18 @@ public:
     void setTextColor(byte red, byte green, byte blue, byte alpha = 255);
 
     // Displays the background and text
-    void display() const override;
+    virtual void display() const override;
 
 
     // Adds to the string
-    void operator+=(std::string toadd);
+    template<typename T>
+    void operator+=(T toadd)
+    {
+        rawText += toadd;
+    }
+
+    // Friends
+    friend class DynamicTextbox;
 };
 
 } // namespace gui

@@ -2,7 +2,7 @@
 #define ITEM_H_INCLUDED
 
 #include <SFML/Graphics.hpp>
-#include "typedefs.h"
+#include "../elements/typedefs.h"
 
 /**
 class Item - abstract class representing a GUI item
@@ -57,6 +57,10 @@ Public Setter Methods:
     -> setHeight(sf::Vector2f to)
     -> setHeight(float newheight)
         Set the height. Will take the Y element out of a sf::Vector
+
+    -> setRectColor(sf::Color color)
+    -> setRectColor(RGBA red, RGBA green, RGBA blue, RGBA alpha = 255)
+        Sets the rectangles color
 
 
 Public Methods:

@@ -84,9 +84,6 @@ void Text::setTextColor(byte red, byte green, byte blue, byte alpha)
 
 void Text::display() const
 {
-    // Draws background
-    window->draw(rect);
-
     // Creates sf::Text object
     sf::Text text = sf::Text(rawText, font, fontSize);
 
@@ -96,13 +93,6 @@ void Text::display() const
 
     // Draws text
     window->draw(text);
-}
-
-
-// Add to the string
-void Text::operator+=(std::string toadd)
-{
-    rawText += toadd;
 }
 
 } // namespace gui

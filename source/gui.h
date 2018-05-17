@@ -7,5 +7,7 @@
 #include "gui/image.h"
 #include "gui/text.h"
 #include "gui/dynamictextbox.h"
+#include "gui/elements/typedefs.h"
+#include "gui/elements/keycodes.h"
 
 #endif // GUI_H_INCLUDED

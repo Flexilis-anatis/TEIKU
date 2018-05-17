@@ -183,6 +183,25 @@ void Item::setHeight(float newheight)
     setSize(width, newheight);
 }
 
+
+/* Set's the rectangles  color.
+ * from item.h docs:
+ *
+ *  -> setRectColor(sf::Color color)
+ *  -> setRectColor(RGBA red, RGBA green, RGBA blue, RGBA alpha = 255)
+ *       Sets the rectangles color
+ */
+
+ void Item::setRectColor(sf::Color color)
+ {
+     rect.setFillColor(color);
+ }
+
+ void Item::setRectColor(RGBA red, RGBA green, RGBA blue, RGBA alpha)
+ {
+     setRectColor(sf::Color(red, green, blue, alpha));
+ }
+
 /* Displays the rectangle.
  * From item.h docs:
  *  -> void display()

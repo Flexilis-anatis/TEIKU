@@ -14,22 +14,29 @@
 namespace gui
 {
 
-class DynamicTextbox: Item
+class DynamicTextbox: public Item
 {
 protected:
-    std::string keyBuffer;
+    unsigned int cursorX;
+    float textSize;
     ConstString resetText;
     Text text;
 
+    void updateCursor();
+    bool textIsInBox(char extraCharacter);
+    void type(char character);
+
 public:
-    DynamicTextbox(float x, float y, float width, float height, std::string startText,
-                   WindowRef window);
+    DynamicTextbox(float x, float y, float chars, float lines, float charHeight,
+                   std::string startText, WindowRef window);
 
-    void update();
 
+    virtual sf::Vector2f getBGSize() const;
     virtual void display() const override;
 
     void send(sf::Event& tosend);
+
+    std::string getText();
 };
 
 } // namespace gui

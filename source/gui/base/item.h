@@ -94,8 +94,8 @@ protected:
 public:
     // Getter methods for X/Y and width/height. Doing it like SFML does to make
     // rendering easier.
-    sf::Vector2f getPos() const;
-    sf::Vector2f getSize() const;
+    virtual sf::Vector2f getPos() const;
+    virtual sf::Vector2f getSize() const;
 
     // Changes the X and Y. Overloaded to use a sf::Vector or two floats.
     void setPos(sf::Vector2f to);

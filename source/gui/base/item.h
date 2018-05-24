@@ -25,9 +25,9 @@ Protected Properties:
 Protected Methods:
     -> virtual void display()
         pure virtual method that must be defined by children classes.
-    -> void setrect(float x, y, width, height, WindowRef window)
-        First four arguments are floats. Simply sets the corresponding properties in the
-        class.
+    -> void setrect(RectInfo dimensions, WindowRef window)
+        First argument is just a float array containing width/height/x/y.
+        Simply sets the corresponding properties in the class.
 
 
 Public Getter Methods:
@@ -87,8 +87,7 @@ protected:
     WindowPtr window;
 
     // Just for child classes to set properties easier.
-    void setrect(float x, float y, float width, float height,
-                 WindowRef window);
+    void setrect(RectInfo, WindowRef window);
 
 
 public:

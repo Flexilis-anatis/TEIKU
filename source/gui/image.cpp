@@ -34,17 +34,18 @@ void Image::setup(std::string texturefilename)
  *
  * From base/item.h docs:
  *
- *  -> void setrect(float x, y, width, height)
- *      All arguments are floats. Simply sets the corresponding properties in the
+ *  -> void setrect(float x, y, width, height, )
+ *      First four arguments are floats. Simply sets the corresponding properties in the
  *      class.
 */
 
-Image::Image(float x, float y, float width, float height,
-             std::string texturefilename, WindowRef window)
+Image::Image(RectInfo, std::string texturefilename, WindowRef window)
 {
     // Setup is called first as to set the rect's texture and avoid making it invisible
     setup(texturefilename);
-    setrect(x, y, width, height, window); // gui::Item::setRect(float,float,float,float): defined in source/gui/base
+
+    // gui::Item::setRect(float,float,float,float,sf::RenderWindow&): defined in source/gui/base
+    setrect(RIx, RIy, RIwidth, RIheight, window);
 }
 
 } // namespace gui

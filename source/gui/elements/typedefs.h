@@ -8,6 +8,8 @@
 typedef uint8_t byte;
 typedef byte RGBA;
 
+#define RectInfo float RIx,float RIy,float RIwidth,float RIheight
+
 typedef typename sf::RenderWindow  Window;
 typedef typename sf::RenderWindow& WindowRef;
 typedef typename sf::RenderWindow* WindowPtr;

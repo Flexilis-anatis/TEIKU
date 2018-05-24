@@ -11,14 +11,13 @@ namespace gui
  *      properties in the class.
 */
 
-void Item::setrect(float x, float y, float width, float height,
-                   WindowRef window)
+void Item::setrect(RectInfo, WindowRef window)
 {
     // References 'this' to avoid naming conflict
-    this->x         = x;
-    this->y         = y;
-    this->width     = width;
-    this->height    = height;
+    this->x         = RIx;
+    this->y         = RIy;
+    this->width     = RIwidth;
+    this->height    = RIheight;
     this->window    = &window;
 
     // Setting position/size of rect

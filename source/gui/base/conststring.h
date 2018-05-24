@@ -1,20 +1,36 @@
 #ifndef CONSTSTRING_H_INCLUDED
 #define CONSTSTRING_H_INCLUDED
 
-#include <string>
-
-// A constant string that allows itself to be set once
-struct ConstString
+// A constant string allows itself to be set once
+template<class Type>
+struct GConst
 {
 private:
     bool isSet = false;
-    std::string contents;
+    Type contents;
 
 public:
-    ConstString(){}
+    GGonst(Type d){create(d)}
+    GConst(){}
 
-    void create(std::string s);
-    std::string str();
+    void create(Type d)
+    {
+        if (isSet)
+        {
+            throw std::runtime_error("ConstString created twice");
+        }
+
+        else
+        {
+            isSet = true;
+            data = d;
+        }
+    }
+
+    Type value()
+    {
+        return data;
+    }
 };
 
 #endif // CONSTSTRING_H_INCLUDED

@@ -34,8 +34,7 @@ protected:
 
 public:
     // Calls setrect and setup
-    Image(float x, float y, float width, float height,
-          std::string texturefilename, WindowRef window);
+    Image(RectInfo, std::string texturefilename, WindowRef window);
 
     // Since this will be in the lowest level of GUI classes that will be used as a
     // standalone, we need a placeholder constructor

@@ -1,7 +1,7 @@
 #ifndef IMAGE_H_INCLUDED
 #define IMAGE_H_INCLUDED
 
-#include "base/item.h"
+#include "base/rectitem.h"
 #include <string>
 
 /**
@@ -16,12 +16,11 @@ Protected Methods:
         loads the texture and puts the texture into the rectangle
 */
 
-namespace gui
-{
+namespace gui{
 
 // Possibly the base class of buttons, for instance. But certainly useful for other
 // purposes
-class Image: public Item
+class Image: public base::RectItem
 {
 protected:
     // This will hold the image. You can easily go texture.loadFromFile to load most
@@ -29,12 +28,16 @@ protected:
     // pointer to it alive though, or it won't work.
     sf::Texture* texture;
 
+
+    // (c)onstant std::(string)
+    typedef const std::string& cString;
+
     // Set everything up. Needs the filename of an image
-    void setup(std::string texturefilename);
+    void setup(cString texturefilename);
 
 public:
-    // Calls setrect and setup
-    Image(RectInfo, std::string texturefilename, WindowRef window);
+    // Calls setRectInfo and setup
+    Image(__RECTINFO, cString texturefilename, WindowRef window);
 
     // Since this will be in the lowest level of GUI classes that will be used as a
     // standalone, we need a placeholder constructor

@@ -4,91 +4,32 @@
 #include <SFML/Graphics.hpp>
 #include "../elements/typedefs.h"
 
-/**
-class Item - abstract class representing a GUI item
+namespace gui{
+namespace base{
 
-Protected Properties:
-    -> float x
-        X position of some item
-    -> float y
-        Y position of some item
-    -> float width
-        width of some item
-    -> float height
-        height of some item
-    -> sf::RectangleShape rect
-        actual rectangle representing prev. properties
-    -> WindowPtr window
-        Holds a window to render to
+/** \brief A basic item class. Contains X/Y/width/height along with basic
+ * setters/getters, some helpful typedefs, and a pure-virtual display method
+ */
 
-
-Protected Methods:
-    -> virtual void display()
-        pure virtual method that must be defined by children classes.
-    -> void setrect(RectInfo dimensions, WindowRef window)
-        First argument is just a float array containing width/height/x/y.
-        Simply sets the corresponding properties in the class.
-
-
-Public Getter Methods:
-    -> sf::Vector2f getPos()
-        get's the X and Y properties zipped together in a sf::Vector2f
-    -> sf::Vector2f getSize()
-        get's the width and height properties zipped together in a sf::Vector2f
-
-
-Public Setter Methods:
-    -> setPos(sf::Vector2f to)
-    -> setPos(float newx, float newy)
-        Set the X and Y. Can take either two floats or a sf::Vector2f
-    -> setX(sf::Vector2f to)
-    -> setX(float newx)
-        Set the X. Will take the X element out of a sf::Vector
-    -> setY(sf::Vector2f to)
-    -> setY(float newy)
-        Set the Y. Will take the Y element out of a sf::Vector
-
-    -> setSize(sf::Vector2f to)
-    -> setSize(float newwidth, float newheight)
-        Set the width and height. Can take either two floats or a sf::Vector2f
-    -> setWidth(sf::Vector2f to)
-    -> setWidth(float newwidth)
-        Set the width. Will take the X element out of a sf::Vector
-    -> setHeight(sf::Vector2f to)
-    -> setHeight(float newheight)
-        Set the height. Will take the Y element out of a sf::Vector
-
-    -> setRectColor(sf::Color color)
-    -> setRectColor(RGBA red, RGBA green, RGBA blue, RGBA alpha = 255)
-        Sets the rectangles color
-
-
-Public Methods:
-    -> void setRectColor(sf::Color color)
-    -> void setRectColor(RGBA red, RGBA green, RGBA blue, RGBA alpha)
-        Set the rect color with an sf::Color or RGBA (alpha defaulting to 255).
-        If you don't want a it to be visible, set the alpha to 0 and it will be
-        just fine.
-*/
-
-namespace gui
-{
-
+// Documentation for every method is in the implementation file. I like to keep my
+// definitions decently brief and easy to traverse.
 class Item
 {
 protected:
     // All items will be square based
     float x, y, width, height;
-    // The default rectangle
-
-    sf::RectangleShape rect;
 
     // The main window pointer. Needed for displaying
     WindowPtr window;
 
     // Just for child classes to set properties easier.
-    void setrect(RectInfo, WindowRef window);
+    void setRectInfo(__RECTINFO, WindowRef window);
 
+
+    // constant (r)eference to sf::(Vector2f)
+    typedef const sf::Vector2f& rVector2f;
+    // (c)onstant (float)
+    typedef const float cFloat;
 
 public:
     // Getter methods for X/Y and width/height. Doing it like SFML does to make
@@ -97,37 +38,39 @@ public:
     virtual sf::Vector2f getSize() const;
 
     // Changes the X and Y. Overloaded to use a sf::Vector or two floats.
-    void setPos(sf::Vector2f to);
-    void setPos(float newx, float newy);
+    void setPos(rVector2f to);
+    void setPos(cFloat newX, cFloat newY);
 
     // Changes the X. Takes the X element out of the sf::Vector if given
-    void setX(sf::Vector2f to);
-    void setX(float newx);
+    void setX(rVector2f to);
+    void setX(cFloat newX);
 
     // Changes the Y. Takes the Y element out of the sf::Vector if given
-    void setY(sf::Vector2f to);
-    void setY(float newy);
+    void setY(rVector2f to);
+    void setY(cFloat newY);
 
     // Changes the width and height. Overloaded to use a sf::Vector or two floats.
-    void setSize(sf::Vector2f to);
-    void setSize(float newwidth, float newheight);
+    void setSize(rVector2f to);
+    void setSize(cFloat newwidth, cFloat newheight);
 
     // Changes the width. Takes the X element out of the sf::Vector if given
-    void setWidth(sf::Vector2f to);
-    void setWidth(float newwidth);
+    void setWidth(rVector2f to);
+    void setWidth(cFloat newwidth);
 
     // Changes the height. Takes the Y element out of the sf::Vector if given
-    void setHeight(sf::Vector2f to);
-    void setHeight(float newheight);
+    void setHeight(rVector2f to);
+    void setHeight(cFloat newheight);
 
-    // Set's the rectangle color. Uses RGBA format, with alpha defaulting to 255
-    void setRectColor(sf::Color color);
-    void setRectColor(RGBA red, RGBA green, RGBA blue, RGBA alpha = 255);
+    // Making it a pure virtual method. Children classes must implement themselves.
+    virtual void display() const = 0;
 
-    // Making it a virtual method. Children classes can implement themselves.
-    virtual void display() const;
+    // Child classes can redefine if they need to do anything extra on resize/
+    // reposition.
+    virtual void handleNewSize(rVector2f newSize){};
+    virtual void handleNewPosition(rVector2f newPos){};
 };
 
+} // namespace base
 } // namespace gui
 
 #endif // ITEM_H_INCLUDED

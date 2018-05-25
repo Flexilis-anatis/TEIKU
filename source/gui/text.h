@@ -3,18 +3,21 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "base/item.h"
+#include <vector>
+
+#include "base/rectitem.h"
+#include "textgroup.h"
 
 namespace gui
 {
 
-class Text: public Item
+class Text: public base::RectItem
 {
     sf::Font font;
-    sf::Text text;
+    text::TextGroup text;
 
 public:
-    Text(sf::Vector2f position, std::string text, WindowRef window);
+    Text(const sf::Vector2f& position, const std::string& text, WindowRef window);
     void display() const override;
 };
 

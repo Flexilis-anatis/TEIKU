@@ -1,18 +1,29 @@
 #ifndef TYPEDEFS_H_INCLUDED
 #define TYPEDEFS_H_INCLUDED
 
-/// Contains typedefs for GUI
+/// typedefs for GUI
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
 typedef uint8_t byte;
-typedef byte RGBA;
+typedef const byte RGBA;
 
-#define RectInfo float RIx,float RIy,float RIwidth,float RIheight
+// Window typedefs
+typedef typename sf::RenderWindow Window;
 
-typedef typename sf::RenderWindow  Window;
-typedef typename sf::RenderWindow& WindowRef;
-typedef typename sf::RenderWindow* WindowPtr;
+typedef Window& WindowRef;
+typedef Window* WindowPtr;
+
+// Constant window typedefs
+typedef const Window cWindow;
+
+typedef cWindow& cWindowRef;
+typedef cWindow* cWindowPtr;
+
+/// global macros for GUI
+
+#define __RECTINFO const float RI_x,const float RI_y,const float RI_width,const float RI_height
+#define __COLORINFO RGBA CI_red,RGBA CI_green,RGBA CI_blue,RGBA CI_alpha=255
 
 
 #endif // TYPEDEFS_H_INCLUDED

@@ -1,1 +1,1 @@
-///@todo Rewrite this crap!
+///@todo Rewrite this!

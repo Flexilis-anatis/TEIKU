@@ -9,7 +9,7 @@
 
 // Base folder
 #include "gui/base/item.h"
-#include "gui/base/conststring.h"
+#include "gui/base/sconst.h"
 
 // Main folder
 #include "gui/image.h"

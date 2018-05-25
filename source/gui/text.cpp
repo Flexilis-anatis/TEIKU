@@ -1,11 +1,10 @@
 #include "text.h"
 
-namespace gui
-{
+namespace gui{
 
-Text::Text(sf::Vector2f position, std::string text, WindowRef window)
+Text::Text(const sf::Vector2f& position, const std::string& text, WindowRef window)
 {
-    setrect(position.x, position.y, 0, 0, window);
+    setRectInfo(position.x, position.y, 0, 0, window);
 }
 
 void Text::display() const
@@ -13,4 +12,4 @@ void Text::display() const
     // pass
 }
 
-}
+} // namespace gui

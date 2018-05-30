@@ -15,47 +15,19 @@ enum CursorDir
 
 class TextGroup
 {
-    struct Cursor
-    {
-        typedef unsigned int uint;
-
-        uint x, y, idealX;
-
-        set(uint x_, uint y_, uint idealX_)
-        {
-            x = x_;
-            y = y_;
-            idealX = idealX_;
-        }
-
-        set(uint x_, uint y_)
-        {
-            x = x_;
-            y = y_;
-            idealX = x;
-        }
-    };
-
-    struct PagePos
-    {
-        typedef unsigned int uint;
-        uint x, y;
-    };
-
-    /// START OF ELEMENTS
-    std::vector<sf::Text> text;
+    typedef unsigned int Index;
+    std::vector<sf::Text> textLines;
     sf::Font font;
 
-    PagePos scrollPosition;
-    Cursor cursor;
+    sf::Vector2f indexToXY(const Index index);
 
 public:
     TextGroup(const sf::Font& fontToCopy);
-    TextGroup(const std::string& fontFilename);
+    TextGroup(const std::string fontFilename);
     TextGroup(){}
 
-    void newline();
-    void type(const char character);
+    void insert(const char character, Index line, Index column);
+    void insert(const char character, Index index);
 
     void moveCursor(const CursorDir direction);
 };

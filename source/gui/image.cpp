@@ -2,13 +2,6 @@
 
 namespace gui{
 
-/* Basically a constructor, just designed so it can be easily called by child classes.
- * From image.h docs:
- *
- *  -> void setup(std::string texturefilename)
- *      loads the texture and puts the texture into the rectangle
-*/
-
 void Image::setup(cString texturefilename)
 {
     // Loading texture
@@ -23,20 +16,6 @@ void Image::setup(cString texturefilename)
     rect.setTexture(texture);
 }
 
-
-/* Calls setup AND setRectInfo.
- *
- * From image.h docs:
- *
- *  -> void setup(std::string texturefilename,)
- *      loads the texture and puts the texture into the rectangle
- *
- * From base/item.h docs:
- *
- *  -> void setRectInfo(float x, y, width, height, )
- *      First four arguments are floats. Simply sets the corresponding properties in the
- *      class.
-*/
 
 Image::Image(__RECTINFO, cString texturefilename, WindowRef window)
 {

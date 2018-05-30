@@ -4,22 +4,9 @@
 #include "base/rectitem.h"
 #include <string>
 
-/**
-Class Image - semi abstract class representing a GUI item that displays an image
-
-Protected Properties:
-    -> sf::Texture* texture
-        Holds a loaded image
-
-Protected Methods:
-    -> void setup(std::string texturefilename)
-        loads the texture and puts the texture into the rectangle
-*/
-
 namespace gui{
 
-// Possibly the base class of buttons, for instance. But certainly useful for other
-// purposes
+///\brief A class for rendering images
 class Image: public base::RectItem
 {
 protected:

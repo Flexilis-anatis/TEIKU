@@ -25,7 +25,6 @@ protected:
     // Just for child classes to set properties easier.
     void setRectInfo(__RECTINFO, WindowRef window);
 
-
     // constant (r)eference to sf::(Vector2f)
     typedef const sf::Vector2f& rVector2f;
     // (c)onstant (float)

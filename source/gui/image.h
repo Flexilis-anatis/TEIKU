@@ -17,7 +17,7 @@ protected:
 
 
     // (c)onstant std::(string)
-    typedef const std::string& cString;
+    typedef const string& cString;
 
     // Set everything up. Needs the filename of an image
     void setup(cString texturefilename);

@@ -17,7 +17,7 @@ class Text: public base::RectItem
     text::TextGroup text;
 
 public:
-    Text(const sf::Vector2f& position, const std::string& text, WindowRef window);
+    Text(const sf::Vector2f& position, const string& text, WindowRef window);
     void display() const override;
 };
 

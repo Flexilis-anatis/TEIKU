@@ -25,5 +25,8 @@ typedef cWindow* cWindowPtr;
 #define __RECTINFO const float RI_x,const float RI_y,const float RI_width,const float RI_height
 #define __COLORINFO RGBA CI_red,RGBA CI_green,RGBA CI_blue,RGBA CI_alpha=255
 
+/// global using statements
+#include <string>
+using std::string;
 
 #endif // TYPEDEFS_H_INCLUDED

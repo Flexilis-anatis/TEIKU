@@ -1,4 +1,5 @@
 #include "source/gui.h"
+#include <iostream>
 
 /**
 Author:     RubberDuckyMaster
@@ -14,7 +15,19 @@ I'm going to try and design my own file selector for
 saving/opening, because I hate the Win32 API.
 */
 
+using gui::text::TextGroup;
+
 int main()
 {
+    TextGroup e = gui::text::TextGroup("resources\\monospace.ttf");
+
+    e.insert('5', 0, 0);
+    e.insert('\n', 0, 0);
+    e.insert('h', 1, 0);
+
+    for (unsigned int i = 0; i < e.textLines.size(); i++)
+        std::cout << e.textLines[i].getString().toAnsiString() << std::endl;
+
     return 0;
 }
+

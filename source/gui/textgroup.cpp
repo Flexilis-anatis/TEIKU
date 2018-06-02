@@ -1,5 +1,7 @@
 #include "textgroup.h"
 
+#define DEBUG_TEXTGROUP
+
 #ifdef DEBUG_TEXTGROUP
 #include <iostream>
 #endif
@@ -8,6 +10,7 @@
 
 namespace gui{
 namespace text{
+
 
 sf::Vector2i TextGroup::indexToXY(const Index index)
 {
@@ -21,8 +24,7 @@ sf::Vector2i TextGroup::indexToXY(const Index index)
 
     // While its still less than the index, add the length of the next string
     // to total and increase the line number
-    while (total < index)
-        total += textLines[line++].getString().getSize();
+    for(;total < index; total += textLines[line++].getString().getSize());
 
     // Ok, I'll admit this is a little hacky. This:
     //   Decreases the line number
@@ -35,16 +37,25 @@ sf::Vector2i TextGroup::indexToXY(const Index index)
     // plus the column is the same as the desired index. (The actual logic
     // works by subtracting from the index and doesn't check for equality,
     // but that made more sense and actually means the same thing)
-    while (total < index-(++column)){}
+    while(total<index-(++column));
 
     // There's an edge case for the last character, so if it's the last
     // character (which will be one over the maximum index) reset the
     // column and increase the line
-    column == lastSize && ++line && (column = 0);
+    column == lastSize && (column = line++*0);
 
     #ifdef DEBUG_TEXTGROUP
-    std::cout << "Converted " << index << " to (" << line << ", " << column << ')' << std::endl;
+    std::cout << "Converted " << index << " to (" << line << ',' << column << ')' << std::endl;
     #endif
+
+    /*
+    if (!index) return sf::Vector2i(0,0);
+    Index line=0, column=0, total=0, lastSize;
+    for(;total < index; total += textLines[line++].getString().getSize());
+    total -= lastSize = textLines[--line].getString().getSize();
+    while(total<index-(++column));
+    column == lastSize && (column = line++*0);
+    */
 
     // Returns the line and column
     return sf::Vector2i(line, column);
@@ -70,10 +81,6 @@ void TextGroup::newline(Index line, Index column)
     string newStr = str.substr(column, str.size());
     string cutStr = str.substr(0, column);
 
-    #ifdef DEBUG_TEXTGROUP
-    std::cout << "NewStr: <" << newStr << ">\nCutStr: <" << cutStr << '>' << std::endl;
-    #endif
-
     textLines[line].setString(cutStr);
     textLines.insert(textLines.begin()+line+1, sf::Text(newStr, font, 30));
 }
@@ -93,11 +100,9 @@ void TextGroup::insert(char character, Index line, Index column)
 
     else
     {
-        #define text textLines[line]
-        string newString = text.getString();
-        newString.insert(column, INSERT_ONCE, character);
-        text.setString(newString);
-        #undef text
+        string newStr = textLines[line].getString();
+        newStr.insert(column, INSERT_ONCE, character);
+        textLines[line].setString(newStr);
     }
 }
 

@@ -9,17 +9,11 @@
 namespace gui{
 namespace text{
 
-enum CursorDir
-{
-    LEFT, RIGHT, UP, DOWN
-};
-
 class TextGroup
 {
-    typedef int Index;
+    typedef unsigned int Index;
 
-// TESTING ONLY
-public:
+protected:
     std::vector<sf::Text> textLines;
     sf::Font font;
 
@@ -38,8 +32,6 @@ public:
     void insert(char character, Index index);
     void insert(string characters, Index line, Index column);
     void insert(string characters, Index index);
-
-    void moveCursor(const CursorDir direction);
 };
 
 } // namespace text

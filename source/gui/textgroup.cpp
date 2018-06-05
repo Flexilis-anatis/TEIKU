@@ -1,17 +1,20 @@
 #include "textgroup.h"
 
-#define DEBUG_TEXTGROUP
+// Char insert
+#define cInsert(pos,char) insert(pos,1,char)
 
-#ifdef DEBUG_TEXTGROUP
-#include <iostream>
-#endif
-
-#define INSERT_ONCE 1
 
 namespace gui{
 namespace text{
 
 
+/** \brief Turns a one-dimensional index into a two-dimensional index
+ *
+ * \param index - the one-dimensional index to transform
+ * \return the two-dimensional index
+ */
+
+// I actually had this down to 5 extremely hacky lines
 sf::Vector2i TextGroup::indexToXY(const Index index)
 {
     // If index is falsey, it must be 0. This is an edge case unfortunately,
@@ -24,43 +27,30 @@ sf::Vector2i TextGroup::indexToXY(const Index index)
 
     // While its still less than the index, add the length of the next string
     // to total and increase the line number
-    for(;total < index; total += textLines[line++].getString().getSize());
+    while(total < index)
+        total += textLines[line++].getString().getSize();
 
-    // Ok, I'll admit this is a little hacky. This:
-    //   Decreases the line number
-    //   Gets the size of the last string
-    //   Saves the size of the last string in lastSize
-    //   ...And gets rid of the size of the last string from the total size
-    total -= lastSize = textLines[--line].getString().getSize();
+    // Gets the size of the last line and stores it
+    lastSize = textLines[--line].getString().getSize();
 
-    // This increases the column until the total distance traversed so far
-    // plus the column is the same as the desired index. (The actual logic
-    // works by subtracting from the index and doesn't check for equality,
-    // but that made more sense and actually means the same thing)
-    while(total<index-(++column));
+    // Gets rid of last lines length from total
+    total =- lastSize;
+
+    // Increases the column until it's reached the index requested
+    while(column + total < index) column++;
 
     // There's an edge case for the last character, so if it's the last
     // character (which will be one over the maximum index) reset the
     // column and increase the line
-    column == lastSize && (column = line++*0);
-
-    #ifdef DEBUG_TEXTGROUP
-    std::cout << "Converted " << index << " to (" << line << ',' << column << ')' << std::endl;
-    #endif
-
-    /*
-    if (!index) return sf::Vector2i(0,0);
-    Index line=0, column=0, total=0, lastSize;
-    for(;total < index; total += textLines[line++].getString().getSize());
-    total -= lastSize = textLines[--line].getString().getSize();
-    while(total<index-(++column));
-    column == lastSize && (column = line++*0);
-    */
+    if (column == lastSize)
+    {
+        column = 0;
+        line++;
+    }
 
     // Returns the line and column
     return sf::Vector2i(line, column);
 }
-
 
 TextGroup::TextGroup(const sf::Font& fontToCopy)
 {
@@ -75,6 +65,13 @@ TextGroup::TextGroup(const string fontFilename)
 }
 
 
+/** \brief Inserts a newline into the text with an X/Y position
+ *
+ * \param line - the line to insert the newline into
+ * \param column - the column to insert the newline into
+ * \return Nothing
+ */
+
 void TextGroup::newline(Index line, Index column)
 {
     string str = textLines[line].getString().toAnsiString();
@@ -85,11 +82,26 @@ void TextGroup::newline(Index line, Index column)
     textLines.insert(textLines.begin()+line+1, sf::Text(newStr, font, 30));
 }
 
-void TextGroup::newline()
+/** \brief Inserts a newline into the text with an index
+ *
+ * \param index - the position to insert the newline into
+ * \return Nothing
+ */
+
+void TextGroup::newline(Index index)
 {
-    newline(textLines.size()-1, textLines[textLines.size()-1].getString().getSize());
+    sf::Vector2f position = indexToXY(index);
+    newline(position.x, position.y);
 }
 
+
+/** \brief Inserts a character into the text with an X/Y position
+ *
+ * \param character - the character to insert
+ * \param line - the line to insert it in
+ * \param column - the column to insert it in
+ * \return Nothing
+ */
 
 void TextGroup::insert(char character, Index line, Index column)
 {
@@ -101,11 +113,22 @@ void TextGroup::insert(char character, Index line, Index column)
     else
     {
         string newStr = textLines[line].getString();
-        newStr.insert(column, INSERT_ONCE, character);
+        newStr.cInsert(column, character);
         textLines[line].setString(newStr);
     }
+
+    // I can get away with only doing this here because all other insert
+    // methods boil down to this method.
+    updateText();
 }
 
+
+/** \brief Inserts a character into the text with an index
+ *
+ * \param character - the character to insert
+ * \param index - the index to insert it into
+ * \return Nothing
+ */
 
 void TextGroup::insert(char character, Index index)
 {
@@ -113,6 +136,14 @@ void TextGroup::insert(char character, Index index)
     insert(character, location.x, location.y);
 }
 
+
+/** \brief Inserts a string into the text with an X/Y position
+ *
+ * \param characters - string to insert
+ * \param line - the line to insert it in
+ * \param column - the column to insert it in
+ * \return Nothing
+ */
 
 void TextGroup::insert(string characters, Index line, Index column)
 {
@@ -127,6 +158,13 @@ void TextGroup::insert(string characters, Index line, Index column)
         }
     }
 }
+
+/** \brief Inserts a string into the text with an index
+ *
+ * \param characters - the string to insert
+ * \param index - the index to insert the string into
+ * \return Nothing
+ */
 
 void TextGroup::insert(string characters, Index index)
 {

@@ -23,7 +23,7 @@ void RectItem::setRect(__RECTINFO, WindowRef window)
  * \return Nothing
  */
 
-void RectItem::display() const
+void RectItem::draw() const
 {
     window->draw(rect);
 }

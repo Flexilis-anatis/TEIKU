@@ -8,7 +8,7 @@ namespace gui{
 namespace base{
 
 /** \brief A basic item class. Contains X/Y/width/height along with basic
- * setters/getters, some helpful typedefs, and a pure-virtual display method
+ * setters/getters, some helpful typedefs, and a pure-virtual draw method
  */
 
 // Documentation for every method is in the implementation file. I like to keep my
@@ -19,7 +19,7 @@ protected:
     // All items will be square based
     float x, y, width, height;
 
-    // The main window pointer. Needed for displaying
+    // The main window pointer. Needed for drawing
     WindowPtr window;
 
     // Just for child classes to set properties easier.
@@ -61,7 +61,7 @@ public:
     void setHeight(cFloat newheight);
 
     // Making it a pure virtual method. Children classes must implement themselves.
-    virtual void display() const = 0;
+    virtual void draw() const = 0;
 
     // Child classes can redefine if they need to do anything extra on resize/
     // reposition.

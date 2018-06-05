@@ -18,7 +18,7 @@ protected:
     void setRect(__RECTINFO, WindowRef window);
 
     // Displays the rectangle
-    virtual void display() const override;
+    virtual void draw() const override;
 
     // Updates rectangle along with X/Y positions
     virtual void handleNewSize(rVector2f newSize) override;

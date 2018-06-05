@@ -11,14 +11,15 @@
 namespace gui
 {
 
-class Text: public base::RectItem
+class Text: public base::RectItem, public text::TextGroup
 {
-    sf::Font font;
+protected:
     text::TextGroup text;
+    virtual void updateText() override;
 
 public:
-    Text(const sf::Vector2f& position, const string& text, WindowRef window);
-    void display() const override;
+    Text(const sf::Vector2f& position, WindowRef window, const string& text = "");
+    virtual void draw() const override;
 };
 
 }

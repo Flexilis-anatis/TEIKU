@@ -14,22 +14,32 @@ class TextGroup
     typedef unsigned int Index;
 
 protected:
+    // The actual text
     std::vector<sf::Text> textLines;
+
+    // The font the text will load
     sf::Font font;
 
+    // Changes a 1d index to a 2d index
     sf::Vector2i indexToXY(const Index index);
+
+    // Called every time a character is inserted
+    virtual void updateText(){}
 
 public:
     TextGroup(const sf::Font& fontToCopy);
     TextGroup(const string fontFilename);
     TextGroup(){}
 
-    // yay for void!
-
+    // Add a new line into the text
     void newline(Index line, Index column);
-    void newline();
+    void newline(Index);
+
+    // Insert a character into the text
     void insert(char character, Index line, Index column);
     void insert(char character, Index index);
+
+    // Insert a string into the text
     void insert(string characters, Index line, Index column);
     void insert(string characters, Index index);
 };

@@ -5,15 +5,17 @@ namespace gui{
 
 class DynamicTextbox: public Text
 {
+    typedef unsigned int uint;
+
     struct Point
     {
-        typedef unsigned int uint; uint x, y;
+        uint x=0, y=0;
         void set(const uint x_, const uint y_){x=x_;y=y_;}
     };
 
     struct Cursor: Point
     {
-        uint idealX;
+        uint idealX=0;
 
         void set(const uint x, const uint y, const uint ix)
         {
@@ -23,11 +25,12 @@ class DynamicTextbox: public Text
     };
 
 
-    Point scrollPosition;
-    Cursor cursor;
+    Point scrollPosition = Point();
+    Cursor cursor = Cursor();
+    const std::string defaultString;
 
 public:
-    // pass
+    DynamicTextbox(__RECTINFO, uint charSize, WindowRef window, std::string defaultString="");
 };
 
 } // namespace gui

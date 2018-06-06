@@ -1,5 +1,7 @@
 #include "textgroup.h"
 
+#include <iostream>
+
 // Char insert
 #define cInsert(pos,char) insert(pos,1,char)
 
@@ -23,7 +25,7 @@ sf::Vector2i TextGroup::indexToXY(const Index index)
     if (!index) return sf::Vector2i(0,0);
 
     // Initialization of main unsigned ints
-    Index line=0, column=0, total=0, lastSize;
+    Index line=0, total=0, column, lastSize;
 
     // While its still less than the index, add the length of the next string
     // to total and increase the line number
@@ -34,10 +36,10 @@ sf::Vector2i TextGroup::indexToXY(const Index index)
     lastSize = textLines[--line].getString().getSize();
 
     // Gets rid of last lines length from total
-    total =- lastSize;
+    total -= lastSize;
 
     // Increases the column until it's reached the index requested
-    while(column + total < index) column++;
+    column = index - total;
 
     // There's an edge case for the last character, so if it's the last
     // character (which will be one over the maximum index) reset the
@@ -52,16 +54,18 @@ sf::Vector2i TextGroup::indexToXY(const Index index)
     return sf::Vector2i(line, column);
 }
 
-TextGroup::TextGroup(const sf::Font& fontToCopy)
+TextGroup::TextGroup(const sf::Font& fontToCopy, unsigned int fontSize)
+: fontSize(fontSize)
 {
     font = fontToCopy;
-    textLines.push_back(sf::Text("", font, 30));
+    textLines.push_back(sf::Text("", font, fontSize));
 }
 
-TextGroup::TextGroup(const string fontFilename)
+TextGroup::TextGroup(const string fontFilename, unsigned int fontSize)
+: fontSize(fontSize)
 {
     font.loadFromFile(fontFilename);
-    textLines.push_back(sf::Text("", font, 30));
+    textLines.push_back(sf::Text("", font, fontSize));
 }
 
 
@@ -79,7 +83,7 @@ void TextGroup::newline(Index line, Index column)
     string cutStr = str.substr(0, column);
 
     textLines[line].setString(cutStr);
-    textLines.insert(textLines.begin()+line+1, sf::Text(newStr, font, 30));
+    textLines.insert(textLines.begin()+line+1, sf::Text(newStr, font, fontSize));
 }
 
 /** \brief Inserts a newline into the text with an index
@@ -90,8 +94,8 @@ void TextGroup::newline(Index line, Index column)
 
 void TextGroup::newline(Index index)
 {
-    sf::Vector2f position = indexToXY(index);
-    newline(position.x, position.y);
+    sf::Vector2i location = indexToXY(index);
+    newline(location.x, location.y);
 }
 
 

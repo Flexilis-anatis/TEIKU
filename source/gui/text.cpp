@@ -4,11 +4,10 @@
 
 namespace gui{
 
-Text::Text(const sf::Vector2f& position, WindowRef window, const string& text)
+Text::Text(const sf::Vector2f& position, WindowRef window, unsigned int fontSize, const string& text)
+: TextGroup("resources\\monospace.ttf", fontSize)
 {
     setRectInfo(position.x, position.y, 0, 0, window);
-    font.loadFromFile("resources\\monospace.ttf");
-    textLines.push_back(sf::Text("", font, 30));
     if (text.size()) insert(text, 0);
 }
 

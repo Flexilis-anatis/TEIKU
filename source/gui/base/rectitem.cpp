@@ -3,11 +3,10 @@
 namespace gui{
 namespace base{
 
-/** \brief Quasi-constructor. Sets up rectangle with X/Y/width/height from __RECTINFO
+/** \brief Quasi-constructor. Sets up sf::Rectangle with X/Y/width/height from __RECTINFO
  *
  * \param const float RI_x/RI_y/RI_width/RI_height - the main four parameters of the rect
  * \param sf::RenderWindow& window - the window to draw to
- * \return
  */
 
 void RectItem::setRect(__RECTINFO, WindowRef window)

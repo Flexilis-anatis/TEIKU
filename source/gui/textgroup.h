@@ -26,10 +26,13 @@ protected:
     // Called every time a character is inserted
     virtual void updateText(){}
 
+    // The font size
+    const unsigned int fontSize;
+
 public:
-    TextGroup(const sf::Font& fontToCopy);
-    TextGroup(const string fontFilename);
-    TextGroup(){}
+    TextGroup(const sf::Font& fontToCopy, unsigned int fontSize = 30);
+    TextGroup(const string fontFilename, unsigned int fontSize = 30);
+    TextGroup():fontSize(0){};
 
     // Add a new line into the text
     void newline(Index line, Index column);

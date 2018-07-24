@@ -3,8 +3,10 @@
 
 namespace gui
 {
+namespace Keycode
+{
 
-enum Keycode
+enum
 {
    BACKSPACE = 8,
    TAB = 9,
@@ -107,6 +109,7 @@ enum Keycode
    SINGLEQUOTE = 222
 };
 
+} // namespace keycode
 } // namespace gui
 
 #endif // KEYCODES_H_INCLUDED

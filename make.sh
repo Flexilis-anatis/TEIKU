@@ -3,4 +3,4 @@ files="$(find . -type f | grep -vE '\./\.git|\.gch' | grep -E '\.cpp|\.h|\.hpp|\
 
 sfml_loc=/usr/include
 
-g++ $files -Werror -Wall -o teiku.out -L$sfml_loc -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
+eval "g++ $files -Werror -Wall -o teiku.out -L$sfml_loc -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system"

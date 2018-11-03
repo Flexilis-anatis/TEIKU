@@ -6,8 +6,18 @@
 #include <vector>
 #include <string>
 
+// Index To X/Y Function Wrapper
+// makes f(x,y) = f(i)
+#define ITXYFuncWrapper(func) void func(Index index){auto xy=indexToXY(index);func(xy.x,xy.y);}
+// optional extra args for above macro
+#define AITXYFuncWrapper(func,args) void func(args,Index index){auto xy=indexToXY(index);func(xy.x,xy.y);}
+
 namespace gui{
 namespace text{
+
+/**
+    A handler for a block of text.  It's designed to be easy to handle with for displaying.
+*/
 
 class TextGroup
 {
@@ -36,18 +46,21 @@ public:
 
     // Add a new line into the text
     void newline(Index line, Index column);
-    void newline(Index);
+    ITXYFuncWrapper(newline)
 
     // Insert a character into the text
     void insert(char character, Index line, Index column);
-    void insert(char character, Index index);
+    AITXYFuncWrapper(insert, char character)
 
     // Insert a string into the text
     void insert(string characters, Index line, Index column);
-    void insert(string characters, Index index);
+    AITXYFuncWrapper(insert, string characters)
 };
 
 } // namespace text
 } // namespace gui
+
+#undef ITXYFuncWrapper
+#undef AITXYFuncWrapper
 
 #endif // TEXTGROUP_H_INCLUDED

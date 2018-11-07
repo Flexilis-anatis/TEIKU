@@ -5,7 +5,6 @@
 // Char insert
 #define cInsert(pos,char) insert(pos,1,char)
 
-
 namespace gui{
 namespace text{
 
@@ -19,32 +18,41 @@ namespace text{
 // I actually had this down to 5 extremely hacky lines
 sf::Vector2i TextGroup::indexToXY(const Index index)
 {
-    // If index is falsey, it must be 0. This is an edge case unfortunately,
-    // and just defining it is a much briefer solution than making the algo
-    // deal with it.
-    if (!index) return sf::Vector2i(0,0);
+    /*
+        Goes through the lines until the 1D index <= traversed chars.
+
+        That means you're on the right line, so just remove the last line's chars from the the
+        traversed chars and you can get the column by subtracting the traversed chars from the
+        1D index.
+
+        Boom! Line and column (or X/Y).
+    */
+
+    // This is an edge case unfortunately, and just defining it is a much briefer solution than
+    // making the algo deal with it.
+    if (index == 0) return sf::Vector2i(0,0);
 
     // Initialization of main unsigned ints
-    Index line=0, total=0, column, lastSize;
+    Index line=0, column, totalSize=0, lastLineSize;
 
     // While its still less than the index, add the length of the next string
     // to total and increase the line number
-    while(total < index)
-        total += textLines[line++].getString().getSize();
+    while(totalSize < index)
+        totalSize += textLines[line++].getString().getSize();
 
     // Gets the size of the last line and stores it
-    lastSize = textLines[--line].getString().getSize();
+    lastLineSize = textLines[--line].getString().getSize();
 
     // Gets rid of last lines length from total
-    total -= lastSize;
+    totalSize -= lastLineSize;
 
     // Increases the column until it's reached the index requested
-    column = index - total;
+    column = index - totalSize;
 
     // There's an edge case for the last character, so if it's the last
     // character (which will be one over the maximum index) reset the
     // column and increase the line
-    if (column == lastSize)
+    if (column == lastLineSize)
     {
         column = 0;
         line++;
@@ -78,26 +86,18 @@ TextGroup::TextGroup(const string fontFilename, unsigned int fontSize)
 
 void TextGroup::newline(Index line, Index column)
 {
+    // Getting a std::string from an sf::String
     string str = textLines[line].getString().toAnsiString();
+    // Getting the text after the newline
     string newStr = str.substr(column, str.size());
+    // Getting the text before the newline
     string cutStr = str.substr(0, column);
 
+    // Setting the line to the text before the newline
     textLines[line].setString(cutStr);
+    // Inserting the text after to the next line
     textLines.insert(textLines.begin()+line+1, sf::Text(newStr, font, fontSize));
 }
-
-/** \brief Inserts a newline into the text with an index
- *
- * \param index - the position to insert the newline into
- * \return Nothing
- */
-
-void TextGroup::newline(Index index)
-{
-    sf::Vector2i location = indexToXY(index);
-    newline(location.x, location.y);
-}
-
 
 /** \brief Inserts a character into the text with an X/Y position
  *
@@ -127,20 +127,6 @@ void TextGroup::insert(char character, Index line, Index column)
 }
 
 
-/** \brief Inserts a character into the text with an index
- *
- * \param character - the character to insert
- * \param index - the index to insert it into
- * \return Nothing
- */
-
-void TextGroup::insert(char character, Index index)
-{
-    sf::Vector2i location = indexToXY(index);
-    insert(character, location.x, location.y);
-}
-
-
 /** \brief Inserts a string into the text with an X/Y position
  *
  * \param characters - string to insert
@@ -161,19 +147,6 @@ void TextGroup::insert(string characters, Index line, Index column)
             column = 0;
         }
     }
-}
-
-/** \brief Inserts a string into the text with an index
- *
- * \param characters - the string to insert
- * \param index - the index to insert the string into
- * \return Nothing
- */
-
-void TextGroup::insert(string characters, Index index)
-{
-    sf::Vector2i location = indexToXY(index);
-    insert(characters, location.x, location.y);
 }
 
 } // namespace text

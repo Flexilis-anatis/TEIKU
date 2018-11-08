@@ -17,7 +17,8 @@ protected:
     virtual void updateText() override;
 
 public:
-    Text(const sf::Vector2f& position, WindowRef window, unsigned int fontSize=30, const string& text = "");
+    Text(const sf::Vector2f& position, WindowRef window, const string& text = "",
+         unsigned int fontSize=30, const string font = "resources/monospace.ttf");
     virtual void draw() const override;
 };
 

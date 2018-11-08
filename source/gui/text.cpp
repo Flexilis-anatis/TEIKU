@@ -4,8 +4,9 @@
 
 namespace gui{
 
-Text::Text(const sf::Vector2f& position, WindowRef window, const string& text, unsigned int fontSize)
-: TextGroup("resources/monospace.ttf", fontSize)
+Text::Text(const sf::Vector2f& position, WindowRef window, const string& text,
+           unsigned int fontSize, string font)
+: TextGroup(font, fontSize)
 {
     setRectInfo(position.x, position.y, 0, 0, window);
 
